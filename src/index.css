@@ -1,9 +1,30 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+* {
+	scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+	@apply w-[5px];
+}
+
+*::-webkit-scrollbar-track {
+	@apply bg-gray-300 rounded;
+}
+
+*::-webkit-scrollbar-thumb {
+	@apply bg-gray-500 rounded border-2 border-gray-500  transition-colors hover:bg-gray-700;
+}
 
 @layer base {
 	body {
-		@apply font-primary;
+		@apply font-primary text-sm lg:text-base;
+	}
+
+	button[disabled] {
+		@apply cursor-none pointer-events-none select-none opacity-75;
 	}
 }
+
+@tailwind components;
+@tailwind utilities;

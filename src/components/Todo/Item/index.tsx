@@ -1,10 +1,10 @@
 import React from 'react';
-import useInput from '../../../hooks/useInput';
-import { useToDo } from '../context';
-import { TodoItemType } from '../type';
+import useInput from '@/hooks/useInput';
+import { useToDoContext } from '@/components/Todo/context';
+import { TodoItemType } from '@/components/Todo/type';
 
 const Item: React.FC<TodoItemType> = ({ id, isChecked = false, isShowed, description = '' }) => {
-	const { updateItem, removeItem } = useToDo();
+	const { updateItem, removeItem } = useToDoContext();
 	const [todo, setTodo] = useInput(description);
 	const [checked, setChecked] = useInput(isChecked);
 

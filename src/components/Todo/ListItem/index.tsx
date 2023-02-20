@@ -1,21 +1,21 @@
+import { useToDoContext } from '@/components/Todo/context';
+import Item from '@/components/Todo/Item';
 import React from 'react';
-import { useToDo } from '../context';
-import Item from '../Item';
 
 const ListItem: React.FC<{ children?: any; rest?: any[] }> = ({ children, ...rest }) => {
-	const { state: todoList } = useToDo();
+	const { state: todoList } = useToDoContext();
 
 	return (
-		<div className='flex flex-col w-100 peer' {...rest}>
-			{todoList.length > 0 ? (
-				todoList.map(({ id, description, isChecked }) => (
-					<Item key={id} id={id} isChecked={isChecked} description={description} />
-				))
-			) : (
-				<div className='w-full gap-3 py-2 border-b group text-center text-gray-400 italic '>
-					<p>Nothing needs to be done !</p>
-				</div>
-			)}
+		<div className='max-h-[275px] overflow-y-auto snap-y snap-mandatory scroll-smooth pr-1'>
+			<div className='flex flex-col w-100 peer' {...rest}>
+				{todoList.list.length > 0 ? (
+					todoList.list.map(({ id, ...rest }) => (rest.isShowed ? <Item key={id} id={id} {...rest} /> : null))
+				) : (
+					<div className='w-full gap-3 py-2 border-b group text-center text-gray-400 italic '>
+						<p>Nothing needs to be done !</p>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };
